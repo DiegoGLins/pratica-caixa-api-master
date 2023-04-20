@@ -12,31 +12,16 @@ import * as React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import routes from '../routes/routes';
-import { useAppSelector } from '../store/hooks';
-import { selectAll } from '../store/modules/transactions/TransactionsSlice';
 
 function ResponsiveAppBar() {
-  const transactions = useAppSelector(selectAll);
   const navigate = useNavigate();
 
-  const mostrarSaldo = () => {
-    let saldo = 0;
+  // const valorEntradas = transactions.filter((item) => item.type === "Entrada");
+  // const saldoEntrada = valorEntradas.reduce((soma, valor) => soma + Number(valor.value), 0);
+  // const valorSaidas = transactions.filter((item) => item.type === "Saida");
+  // const saldoSaidas = valorSaidas.reduce((soma, valor) => soma + Number(valor.value), 0);
 
-    transactions.forEach(item => {
-      if (item.type === 'Entrada') {
-        saldo += Number(item.value);
-      } else {
-        saldo -= Number(item.value);
-      }
-    });
-    return saldo;
-    // const valorEntradas = transactions.filter((item) => item.type === "Entrada");
-    // const saldoEntrada = valorEntradas.reduce((soma, valor) => soma + Number(valor.value), 0);
-    // const valorSaidas = transactions.filter((item) => item.type === "Saida");
-    // const saldoSaidas = valorSaidas.reduce((soma, valor) => soma + Number(valor.value), 0);
-
-    // return saldoEntrada - saldoSaidas;
-  };
+  // return saldoEntrada - saldoSaidas;
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 
@@ -68,7 +53,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none'
             }}
           >
-            Minhas Transações
+            Listagem de personagens
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -123,18 +108,8 @@ function ResponsiveAppBar() {
               textDecoration: 'none'
             }}
           >
-            Minhas Transações
+            Meus personagens
           </Typography>
-
-          <Box
-            sx={{
-              flexGrow: 4,
-              display: { xs: 'none', md: 'flex' },
-              justifyContent: { md: 'center' }
-            }}
-          >
-            <Typography variant="h6">Saldo da conta R$ {mostrarSaldo()}</Typography>
-          </Box>
 
           <Box
             sx={{

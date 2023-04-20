@@ -1,3 +1,3 @@
-const routes = [{ label: 'Cadastrar', url: '/transactions' }];
+const routes = [{ label: 'Buscar personagem', url: '/search' }];
 
 export default routes;

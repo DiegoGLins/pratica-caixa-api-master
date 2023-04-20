@@ -1,19 +1,8 @@
 import { createAsyncThunk, createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import { doGet } from '../../services/api';
+import SearchType from '../../types/SearchType';
 
-export interface Person {
-  name: string;
-  birth_year: string;
-  eye_color: string;
-  gender: string;
-  hair_color: string;
-  height: string;
-  films: any;
-  species: any;
-  url: string;
-  edited: string;
-}
-const adapter = createEntityAdapter<Person>({
+const adapter = createEntityAdapter<SearchType>({
   selectId: item => item.name
 });
 
