@@ -1,14 +1,8 @@
 import {
-  Box,
   Button,
-  Radio,
-  FormControlLabel,
   Grid,
-  Paper,
-  RadioGroup,
   TextField,
   Typography,
-  Alert
 } from '@mui/material';
 import React, { useState } from 'react';
 
@@ -36,7 +30,7 @@ const Search: React.FC = () => {
     <>
       <Grid container sx={{ ...alignCenter, marginTop: '2rem' }}>
         <Grid item xs={12}>
-          <Typography sx={{ padding: '10px' }} variant="h4">
+          <Typography sx={{ padding: '10px' }} variant="h5">
             Digite o nome do seu personagem
           </Typography>
           <TextField
