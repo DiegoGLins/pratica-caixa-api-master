@@ -5,23 +5,9 @@ const api = axios.create({
 });
 
 async function doGet(url: string) {
-  try {
-    const response = await api.get(url);
+  const response = await api.get(url);
 
-    return response.data;
-  } catch (error) {
-    return { success: false, data: { msg: 'GET error on server' } };
-  }
+  return response.data;
 }
 
-async function doPost(url: string, data: any) {
-  try {
-    const response = await api.post(url, data);
-
-    return response.data;
-  } catch (error) {
-    return { success: false, data: { msg: 'POST error on server' } };
-  }
-}
-
-export { doGet, doPost };
+export { doGet };

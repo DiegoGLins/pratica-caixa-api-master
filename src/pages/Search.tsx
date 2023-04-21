@@ -1,13 +1,6 @@
-import {
-  Button,
-  Grid,
-  TextField,
-  Typography,
-} from '@mui/material';
-import React, { useState } from 'react';
-
-import { useAppDispatch } from '../store/hooks';
-import SearchType from '../types/SearchType';
+import { Button, Card, Grid, TextField, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { doGet } from '../services/api';
 
 const alignCenter = {
   display: 'flex',
@@ -17,14 +10,20 @@ const alignCenter = {
 };
 
 const Search: React.FC = () => {
-  const dispatch = useAppDispatch();
+  
+  // const searchRedux = useAppSelector(selectAll);
+  const [peopleSearched, setPeopleSearched] = useState<any[]>([]);
 
-  const [namePerson, setNamePerson] = useState<string>();
-  const [saveName, setSaveName] = useState<string>();
+  const [namePerson, setNamePerson] = useState<string>('');
 
-  const SearchPerson = () => {
-    setSaveName(namePerson);
+  const SearchPerson = async () => {
+    const response = await doGet('/people/?search=' + namePerson);
+    setPeopleSearched(response.results);
   };
+
+  useEffect(() => {
+    SearchPerson();
+  }, [namePerson]);
 
   return (
     <>
@@ -39,11 +38,17 @@ const Search: React.FC = () => {
             placeholder="Ex: Luke Skywalker"
           ></TextField>
         </Grid>
-        <Grid item xs={12} sx={{ padding: '10px' }}>
-          <Button onClick={SearchPerson} fullWidth variant="contained">
-            Buscar
-          </Button>
-        </Grid>
+        {peopleSearched.map(item => {
+          return (
+            <Card elevation={2} key={item.name}>
+              <Typography variant="h5">{item.name}</Typography>
+              <br></br>
+              <Typography variant="h6">{item.birth_year}</Typography>
+              <Typography variant="body1">{item.eye_color}</Typography>
+              <Typography variant="body1">{item.gender}</Typography>
+            </Card>
+          );
+        })}
       </Grid>
     </>
   );
